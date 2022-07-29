@@ -33,10 +33,7 @@ jobs:
       with:
         context: .
         push: true
-        tags: gnosischain/lighthouse:latest
-        build-args: |
-            UPSTREAM_VERSION=latest
-            BEACON_API_PORT=3500
+        tags: gnosischain/lodestar:latest
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache-new
     - name: Move cache
