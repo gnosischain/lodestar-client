@@ -35,15 +35,15 @@ jobs:
       # {upstream_image}{testnet}{version_upstream}
       - run: >
           docker build .
-          --tag gnosischain/lodestar-beacon:${{ env.UPSTREAM_VERSION }}-${{ NETWORK }}
+          --tag gnosischain/lodestar-beacon:${{ env.UPSTREAM_VERSION }}-${{ env.NETWORK }}
           --build-arg UPSTREAM_VERSION=${{ env.UPSTREAM_VERSION }}
           -f beacon.Dockerfile
       - run: >
           docker build .
-          --tag gnosischain/lodestar-validator:${{ env.UPSTREAM_VERSION }}-${{ NETWORK }}
+          --tag gnosischain/lodestar-validator:${{ env.UPSTREAM_VERSION }}-${{ env.NETWORK }}
           --build-arg UPSTREAM_VERSION=${{ env.UPSTREAM_VERSION }}
           -f validator.Dockerfile
-      - run: docker push gnosischain/lodestar-beacon:${{ env.UPSTREAM_VERSION }}-${{ NETWORK }} gnosischain/lodestar-validator:${{ env.UPSTREAM_VERSION }}-${{ NETWORK }}
+      - run: docker push gnosischain/lodestar-beacon:${{ env.UPSTREAM_VERSION }}-${{ env.NETWORK }} gnosischain/lodestar-validator:${{ env.UPSTREAM_VERSION }}-${{ NETWORK }}
       - name: Move cache
         run: |
           rm -rf /tmp/.buildx-cache
