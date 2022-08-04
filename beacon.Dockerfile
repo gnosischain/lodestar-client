@@ -1,6 +1,9 @@
-FROM chainsafe/lodestar:latest
+ARG UPSTREAM_VERSION
+ARG NETWORK
+FROM chainsafe/lodestar:${UPSTREAM_VERSION}
 
-COPY chiado /usr/chiado
+COPY chiado/config.yaml /usr/config.yaml
+COPY chiado/genesis.ssz /usr/genesis.ssz
 
 ENTRYPOINT [ \
   "node", \
@@ -8,8 +11,8 @@ ENTRYPOINT [ \
   "beacon", \
   "--preset=gnosis", \
   "--network=gnosis", \
-  "--paramsFile=/usr/chiado/config.yaml", \
-  "--genesisStateFile=/usr/chiado/genesis.ssz", \
+  "--paramsFile=/usr/config.yaml", \
+  "--genesisStateFile=/usr/genesis.ssz", \
   "--network.discv5.bootEnrs=enr:-Ly4QBWdgA_Tt59pz3xeeMEIv9RXKjJn5pC4TiFxxmGcNrRAUTB5qVs6xTph7SLtLOPxlgn60mxaNyeAHc0inv1Zq40Bh2F0dG5ldHOIAAAAAAAAAACEZXRoMpD1_S08AQAAb1oAAAAAAAAAgmlkgnY0gmlwhJ_LJMCJc2VjcDI1NmsxoQJW6aQs89Fzox8_YwwO1C-ubid5awCWhd8oUPP8s2VepYhzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA" \
   "--network.discv5.bootEnrs=enr:-Ly4QLtEwF2plyYK6wINg8p2cEvON5uxBRTGDjOVY-alCgBzfYoNqzAnYtMTRbH5iZgXAxAweh90i9FEtbN2OvhKZcMBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpD1_S08AQAAb1oAAAAAAAAAgmlkgnY0gmlwhJ_LJ0qJc2VjcDI1NmsxoQLYBUr39uZ3zPfC9XK0f-g22J2Z8DF1Ax3e444dwUmy0ohzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA" \
   "--network.discv5.bootEnrs=enr:-Ly4QHyiqcUzJ4CtI6bhSTAZAD92UMEKwKCObZ-9hSZJAfgtXkj4JbAbhK33rXhqLFeO3isINvpPy_TUvoLB71__rOEBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpD1_S08AQAAb1oAAAAAAAAAgmlkgnY0gmlwhJ_fJsSJc2VjcDI1NmsxoQJjSw3xd3o7Rj1DzE7Wxlr6mEbt5s2re4ANlP_TMDLmUohzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA" \
