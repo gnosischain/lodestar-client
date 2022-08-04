@@ -1,6 +1,7 @@
 # Lodestar Client - Docker
 
-This projects builds a customized version of the lighthouse client with Gnosischain modifications.
+This projects builds a customized version of the lodestar client with Gnosischain modifications.
+Those include the integrations with different testnets.
 
 ## Image tagging 
 
@@ -16,8 +17,8 @@ i.e.
 docker pull gnosischain/lodestar-beacon:v0.41.0-chiado 
 ```
 
-
 We provide lodestart as validator and beacon. 
+
 
 ## Dockerhub 
 
@@ -30,7 +31,7 @@ We provide lodestart as validator and beacon.
 General  
 https://chainsafe.github.io/lodestar/
 
-CLI Reference 
+CLI Reference  
 https://chainsafe.github.io/lodestar/reference/cli/
 
 # Starting lodestar in beacon mode
@@ -48,11 +49,11 @@ docker run gnosischain/lodestar-beacon:v0.41.0-chiado --http-address 0.0.0.0 --h
 
 # Starting lodestar in validator mode
 
-As an example we can run with version v.2.5.1 in testnet chiado as validator:
+As an example we can run with version v0.41.0 in testnet chiado as validator:
 
 ```
-docker pull gnosischain/lighthouse-validator:v2.5.1-chiado  
-docker run gnosischain/lighthouse-validator:v2.5.1-chiado 
+docker pull gnosischain/lodestar-validator:v0.41.0-chiado  
+docker run gnosischain/lodestar-validator:v0.41.0-chiado 
 
 ```
 
