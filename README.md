@@ -45,7 +45,7 @@ docker run gnosischain/lodestar-beacon:v0.41.0-chiado
 
 Customization through flags: 
 ```
-docker run gnosischain/lodestar-beacon:v0.41.0-chiado --http-address 0.0.0.0 --http 
+docker run gnosischain/lodestar-beacon:v0.41.0-chiado --logLevel debug
 ```
 
 # Starting lodestar in validator mode
@@ -62,9 +62,7 @@ Customization through flags:
 
 
 ```
-docker run gnosischain/lodestar-validator:latest-chiado --http-address 0.0.0.0 --http 
+docker run gnosischain/lodestar-validator:latest-chiado --logLevel debug
 
 ```
-
-
 
