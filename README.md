@@ -1,6 +1,7 @@
 # Lodestar Client - Docker
 
 This projects builds a customized version of the lodestar client with Gnosischain modifications.
+
 Those include the integrations with different testnets.
 
 ## Image tagging 
@@ -61,7 +62,7 @@ Customization through flags:
 
 
 ```
-docker run gnosischain/lighthouse-validator:latest-chiado --http-address 0.0.0.0 --http 
+docker run gnosischain/lodestar-validator:latest-chiado --http-address 0.0.0.0 --http 
 
 ```
 
