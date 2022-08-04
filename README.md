@@ -1,18 +1,32 @@
-docker build -t gnosischain/lodestar:latest .
-docker push gnosischain/lodestar:latest   
+# Starting the container in beacon mode
 
-# Starting the container in beacon mode 
 ```
-beacon
---preset=gnosis
---paramsFile=/custom_config_data/config.yaml
---genesisStateFile=/custom_config_data/genesis.ssz
---network.discv5.bootEnrs="{{ bootnode_enrs[0] }}"
+Dockerhub: 
+https://hub.docker.com/repository/docker/gnosischain/lodestar-beacon
+
+
+To run: 
+
+docker run gnosischain/lodestar-{client_type}:{upstream_version}-{testnet}
+
+i.e. 
+
+docker run gnosischain/lodestar-beacon:v0.41.0-chiado
+
 ```
 
 # Starting the container in validator mode
+
 ```
-validator
---preset=gnosis
---paramsFile=/custom_config_data/config.yaml
+
+Dockerhub: 
+https://hub.docker.com/repository/docker/gnosischain/lodestar-validator
+
+To run: 
+
+docker run gnosischain/lodestar-{client_type}:{upstream_version}-{testnet}
+i.e.
+docker run gnosischain/lodestar-validator:v0.41.0-chiado
+
 ```
+
