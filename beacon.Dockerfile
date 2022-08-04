@@ -1,5 +1,4 @@
 ARG UPSTREAM_VERSION
-ARG NETWORK
 FROM chainsafe/lodestar:${UPSTREAM_VERSION}
 
 COPY chiado/config.yaml /usr/config.yaml
