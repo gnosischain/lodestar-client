@@ -1,0 +1,26 @@
+version: "3"
+services:
+  consensus:
+    restart: always
+    build:
+      context: .
+      dockerfile: beacon.Dockerfile
+      args:
+        - UPSTREAM_VERSION=v0.41.0
+    image: gnosischain/lodestar-beacon:local
+    stop_grace_period: 1m
+    volumes:
+      - consensus-data:/var/lib/consensus
+    ports:
+      - 9000:9000/tcp
+      - 9000:9000/udp
+    command: >
+      --rootDir /var/lib/consensus
+      --api.rest.enabled "true"
+      --api.rest.host 0.0.0.0
+      --api.rest.port 5052
+      --port 9000
+      --eth1.providerUrls http://execution:8545
+
+volumes:
+  consensus-data:
