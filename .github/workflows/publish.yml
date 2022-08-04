@@ -29,14 +29,30 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN  }}
 
       # {upstream_image}{testnet}{version_upstream}
-      - name: Build and push
+      - name: Build and push beacon
         uses: docker/build-push-action@v2
         with:
           context: .
           push: true
+          build-args:
+            - "UPSTREAM_VERSION=v0.41.0"
+          file: beacon.Dockerfile
           tags: gnosischain/lodestar-beacon:v0.41.0-chiado
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
+
+      - name: Build and push validator
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          build-args:
+            - "UPSTREAM_VERSION=v0.41.0"
+          file: validator.Dockerfile
+          tags: gnosischain/lodestar-validator:v0.41.0-chiado
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new
+
       - name: Move cache
         run: |
           rm -rf /tmp/.buildx-cache
