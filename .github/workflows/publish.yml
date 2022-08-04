@@ -4,6 +4,10 @@ on:
   push:
     branches: ["main"]
 
+env:
+  UPSTREAM_VERSION: v0.41.0
+  NETWORK: chiado
+
 jobs:
   push_to_registry:
     name: Build and Push Docker image
@@ -29,10 +33,17 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN  }}
 
       # {upstream_image}{testnet}{version_upstream}
-      - run: docker build . --tag gnosischain/lodestar-beacon:v0.41.0-chiado --build-arg UPSTREAM_VERSION=v0.41.0
-      - run: docker build . --tag gnosischain/lodestar-validator:v0.41.0-chiado --build-arg UPSTREAM_VERSION=v0.41.0
-      - run: docker push gnosischain/lodestar-beacon:v0.41.0-chiado gnosischain/lodestar-validator:v0.41.0-chiado
-
+      - run: >
+          docker build .
+          --tag gnosischain/lodestar-beacon:${{ env.UPSTREAM_VERSION }}-${{ NETWORK }}
+          --build-arg UPSTREAM_VERSION=${{ env.UPSTREAM_VERSION }}
+          -f beacon.Dockerfile
+      - run: >
+          docker build .
+          --tag gnosischain/lodestar-validator:${{ env.UPSTREAM_VERSION }}-${{ NETWORK }}
+          --build-arg UPSTREAM_VERSION=${{ env.UPSTREAM_VERSION }}
+          -f validator.Dockerfile
+      - run: docker push gnosischain/lodestar-beacon:${{ env.UPSTREAM_VERSION }}-${{ NETWORK }} gnosischain/lodestar-validator:${{ env.UPSTREAM_VERSION }}-${{ NETWORK }}
       - name: Move cache
         run: |
           rm -rf /tmp/.buildx-cache
