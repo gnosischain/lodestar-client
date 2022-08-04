@@ -18,7 +18,7 @@ i.e.
 docker pull gnosischain/lodestar-beacon:v0.41.0-chiado 
 ```
 
-We provide lodestart as validator and beacon. 
+We provide lodestar as validator and beacon. 
 
 
 ## Dockerhub 
