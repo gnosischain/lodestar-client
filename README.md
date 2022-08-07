@@ -1,68 +1,53 @@
 # Lodestar Client - Docker
 
-This projects builds a customized version of the lodestar client with Gnosischain modifications.
+This projects builds a customized version of the lodestar client with Gnosischain modifications. Those include the integrations with different testnets.
 
-Those include the integrations with different testnets.
+- [gnosischain/lodestar-beacon](https://hub.docker.com/repository/docker/gnosischain/lodestar-beacon)
+- [gnosischain/lodestar-validator](https://hub.docker.com/repository/docker/gnosischain/lodestar-validator)
 
-## Image tagging 
-
-Images are referenced under the following pattern. 
-
-```
-gnosischain/{client_provider}-{node_type}:{upstream_version}-{testnet}
-```
-
-i.e.
+Images are referenced under the following pattern `gnosischain/{client_provider}-{node_type}:{upstream_version}-{testnet}` for example
 
 ```
-docker pull gnosischain/lodestar-beacon:v0.41.0-chiado 
+docker pull gnosischain/lodestar-beacon:latest-chiado
 ```
 
-We provide lodestar as validator and beacon. 
+## Lodestar reference
 
+- General: https://chainsafe.github.io/lodestar/
+- CLI Reference: https://chainsafe.github.io/lodestar/reference/cli/
 
-## Dockerhub 
+# Starting lodestar in Chiado testnet
 
-[Beacon image](https://hub.docker.com/repository/docker/gnosischain/lodestar-beacon)  
+As an example we can run with version v.0.41.0 in testnet chiado:
 
-[Validator image](https://hub.docker.com/repository/docker/gnosischain/lodestar-validator)
-
-## More information on how the lodestar client works and can be customized can be found here:  
-
-General  
-https://chainsafe.github.io/lodestar/
-
-CLI Reference  
-https://chainsafe.github.io/lodestar/reference/cli/
-
-# Starting lodestar in beacon mode
-As an example we can run with version v.0.41.0 in testnet chiado as beacon: 
+1. Create a file `./jwtsecret` with a random 32 bytes hex string
 
 ```
-docker pull gnosischain/lodestar-beacon:v0.41.0-chiado  
-docker run gnosischain/lodestar-beacon:v0.41.0-chiado 
+echo -n 0x$(openssl rand -hex 32 | tr -d "\n") > ./jwtsecret
 ```
 
-Customization through flags: 
-```
-docker run gnosischain/lodestar-beacon:v0.41.0-chiado --logLevel debug
-```
-
-# Starting lodestar in validator mode
-
-As an example we can run with version v0.41.0 in testnet chiado as validator:
+2. Add an `.env` file with your fee recepient and graffiti
 
 ```
-docker pull gnosischain/lodestar-validator:v0.41.0-chiado  
-docker run gnosischain/lodestar-validator:v0.41.0-chiado 
-
+FEE_RECIPIENT=0x0000000000000000000000000000000000000000
+GRAFFITI=gnosischain/lodestar
 ```
 
-Customization through flags: 
-
-
-```
-docker run gnosischain/lodestar-validator:latest-chiado --logLevel debug
+3. Add your keystores in `./keystores` and their password in a file `./keystores/password.txt` to get this file structure:
 
 ```
+.
+├── docker-compose.yml
+├── .env
+├── jwtsecret
+└── keystores/
+    ├── keystore_001.json
+    ├── keystore_002.json
+    └── password.txt
+```
 
+4. Copy and paste the `docker-compose.yml` from this repository, then
+
+```
+docker-compose up -d
+```

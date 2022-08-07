@@ -36,14 +36,18 @@ jobs:
       - run: >
           docker build .
           --tag gnosischain/lodestar-beacon:${{ env.UPSTREAM_VERSION }}-${{ env.NETWORK }}
+          --tag gnosischain/lodestar-beacon:latest-${{ env.NETWORK }}
           --build-arg UPSTREAM_VERSION=${{ env.UPSTREAM_VERSION }}
           -f beacon.Dockerfile
       - run: >
           docker build .
           --tag gnosischain/lodestar-validator:${{ env.UPSTREAM_VERSION }}-${{ env.NETWORK }}
+          --tag gnosischain/lodestar-validator:latest-${{ env.NETWORK }}
           --build-arg UPSTREAM_VERSION=${{ env.UPSTREAM_VERSION }}
           -f validator.Dockerfile
-      
+
       - run: |
-          docker push gnosischain/lodestar-beacon:${{ env.UPSTREAM_VERSION }}-${{ env.NETWORK }} 
+          docker push gnosischain/lodestar-beacon:${{ env.UPSTREAM_VERSION }}-${{ env.NETWORK }}
+          docker push gnosischain/lodestar-beacon:latest-${{ env.NETWORK }}
           docker push gnosischain/lodestar-validator:${{ env.UPSTREAM_VERSION }}-${{ env.NETWORK }}
+          docker push gnosischain/lodestar-validator:latest-${{ env.NETWORK }}

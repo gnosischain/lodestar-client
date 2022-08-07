@@ -9,7 +9,6 @@ ENTRYPOINT [ \
   "/usr/app/node_modules/.bin/lodestar", \
   "beacon", \
   "--preset=gnosis", \
-  "--network=gnosis", \
   "--paramsFile=/usr/config.yaml", \
   "--genesisStateFile=/usr/genesis.ssz", \
   "--network.discv5.bootEnrs=enr:-Ly4QBWdgA_Tt59pz3xeeMEIv9RXKjJn5pC4TiFxxmGcNrRAUTB5qVs6xTph7SLtLOPxlgn60mxaNyeAHc0inv1Zq40Bh2F0dG5ldHOIAAAAAAAAAACEZXRoMpD1_S08AQAAb1oAAAAAAAAAgmlkgnY0gmlwhJ_LJMCJc2VjcDI1NmsxoQJW6aQs89Fzox8_YwwO1C-ubid5awCWhd8oUPP8s2VepYhzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA", \
