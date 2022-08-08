@@ -41,8 +41,8 @@ GRAFFITI=gnosischain/lodestar
 ├── .env
 ├── jwtsecret
 └── keystores/
-    ├── keystore_001.json
-    ├── keystore_002.json
+    ├── keystore-001.json
+    ├── keystore-002.json
     └── password.txt
 ```
 
