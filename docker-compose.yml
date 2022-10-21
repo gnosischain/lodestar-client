@@ -14,15 +14,14 @@ services:
       --jwt-secret=/jwtsecret
       --execution.urls http://execution:8551
       --eth1.providerUrls http://execution:8545
-      --rootDir /var/lib/data
-      --api.rest.enabled "true"
-      --api.rest.host 0.0.0.0
-      --api.rest.port 4000
+      --dataDir /var/lib/data
+      --rest "true"
+      --rest.address 0.0.0.0
+      --rest.port 4000
       --port 9000
-      --logLevelFile debug
+      --logFileLevel debug
       --logFile /var/lib/data/beacon.log
-      --logRotate
-      --logMaxFiles 5
+      --logFileDailyRotate 5
 
   validator:
     image: gnosischain/lodestar-validator:latest-chiado
@@ -31,16 +30,15 @@ services:
       - validator-data:/var/lib/data
       - ./keystores:/var/lib/keystores
     command: >
-      --defaultFeeRecipient ${FEE_RECIPIENT}
+      --suggestedFeeRecipient ${FEE_RECIPIENT}
       --graffiti ${GRAFFITI}
-      --importKeystoresPath /var/lib/keystores
+      --importKeystores /var/lib/keystores
       --importKeystoresPassword /var/lib/keystores/password.txt
-      --rootDir /var/lib/data
+      --dataDir /var/lib/data
       --server http://consensus:4000
-      --logLevelFile debug
+      --logFileLevel debug
       --logFile /var/lib/data/validator.log
-      --logRotate
-      --logMaxFiles 5
+      --logFileDailyRotate 
 
   execution:
     image: gnosischain/nethermind:latest-chiado
